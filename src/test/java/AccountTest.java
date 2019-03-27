@@ -1,6 +1,8 @@
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AccountTest {
 
@@ -15,11 +17,11 @@ public class AccountTest {
     public void shouldIncreaseBalanceAfterDeposit() {
         Account account = new Account();
 
-        account.deposit(5);
+        depositToday(account, 5);
 
         assertThat(account.balance).isEqualTo(5);
 
-        account.deposit(7);
+        depositToday(account, 7);
 
         assertThat(account.balance).isEqualTo(12);
     }
@@ -27,28 +29,55 @@ public class AccountTest {
     @Test
     public void shouldDecreaseBalanceAfterWithdrawal() {
         Account account = new Account();
-        account.deposit(100);
+        depositToday(account, 100);
 
-        account.withdraw(5);
+        withdrawToday(account, 5);
 
         assertThat(account.balance).isEqualTo(95);
 
-        account.withdraw(7);
+        withdrawToday(account, 7);
 
         assertThat(account.balance).isEqualTo(88);
     }
 
     @Test
-    public void shouldProduceReport() {
+    public void shouldProduceReportWithDeposit() {
         Account account = new Account();
 
         assertThat(account.report).isEmpty();
 
         int depositAmount = 100;
-        account.deposit(depositAmount);
+        LocalDate depositDate = LocalDate.of(2019, 03, 27);
+        account.deposit(depositAmount, depositDate);
 
         assertThat(account.report).hasSize(1);
-        Object firstMovement = account.report.get(0);
-        assertThat(firstMovement).isEqualTo(depositAmount);
+        Movement firstMovement = account.report.get(0);
+        assertThat(firstMovement.amount).isEqualTo(depositAmount);
+        assertThat(firstMovement.direction).isEqualTo(Direction.DEPOSIT);
+        assertThat(firstMovement.date).isEqualTo(depositDate);
+    }
+
+    @Test
+    public void shouldProduceReportWithDepositAndWithdrawal() {
+        Account account = new Account();
+        account.deposit(100, LocalDate.of(2019, 03, 27));
+
+        int withdrawalAmount = 50;
+        LocalDate withdrawalDate = LocalDate.of(2019, 03, 28);
+        account.withdraw(withdrawalAmount, withdrawalDate);
+
+        assertThat(account.report).hasSize(2);
+        Movement secondMovement = account.report.get(1);
+        assertThat(secondMovement.amount).isEqualTo(withdrawalAmount);
+        assertThat(secondMovement.direction).isEqualTo(Direction.WITHDRAWAL);
+        assertThat(secondMovement.date).isEqualTo(withdrawalDate);
+    }
+
+    private void depositToday(Account account, int amount) {
+        account.deposit(amount, LocalDate.now());
+    }
+
+    private void withdrawToday(Account account, int amount) {
+        account.withdraw(amount, LocalDate.now());
     }
 }

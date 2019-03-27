@@ -11,8 +11,4 @@ class Movement {
         this.direction = direction;
         this.date = date;
     }
-
-    enum Direction {
-        DEPOSIT,
-    }
 }
