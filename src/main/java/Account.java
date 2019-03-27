@@ -4,7 +4,7 @@ import java.util.List;
 
 class Account {
     int balance;
-    List<Movement> report = new ArrayList();
+    List<Movement> report = new ArrayList<>();
 
     void deposit(int amount, LocalDate date) {
         report.add(new Movement(amount, Direction.DEPOSIT, date));
@@ -17,12 +17,13 @@ class Account {
     }
 
     public int balanceAt(LocalDate date) {
-        return report.stream().filter(movement -> isBeforeOrEqual(date, movement))
-                .mapToInt(movement -> movement.signedAmount())
+        return report.stream()
+                .filter(movement -> isBeforeOrEqual(movement, date))
+                .mapToInt(Movement::signedAmount)
                 .sum();
     }
 
-    private boolean isBeforeOrEqual(LocalDate date, Movement movement) {
+    private boolean isBeforeOrEqual(Movement movement, LocalDate date) {
         return movement.date.isBefore(date) || movement.date.isEqual(date);
     }
 }

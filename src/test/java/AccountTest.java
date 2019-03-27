@@ -47,7 +47,7 @@ public class AccountTest {
         assertThat(account.report).isEmpty();
 
         int depositAmount = 100;
-        LocalDate depositDate = LocalDate.of(2019, 03, 27);
+        LocalDate depositDate = LocalDate.of(2019, 3, 27);
         account.deposit(depositAmount, depositDate);
 
         assertThat(account.report).hasSize(1);
@@ -60,10 +60,10 @@ public class AccountTest {
     @Test
     public void shouldProduceReportWithDepositAndWithdrawal() {
         Account account = new Account();
-        account.deposit(100, LocalDate.of(2019, 03, 27));
+        account.deposit(100, LocalDate.of(2019, 3, 27));
 
         int withdrawalAmount = 50;
-        LocalDate withdrawalDate = LocalDate.of(2019, 03, 28);
+        LocalDate withdrawalDate = LocalDate.of(2019, 3, 28);
         account.withdraw(withdrawalAmount, withdrawalDate);
 
         assertThat(account.report).hasSize(2);
@@ -82,6 +82,7 @@ public class AccountTest {
         assertThat(account.balanceAt(date)).isEqualTo(250);
         assertThat(account.balanceAt(date.plusDays(1))).isEqualTo(200);
     }
+
     private void depositToday(Account account, int amount) {
         account.deposit(amount, LocalDate.now());
     }
