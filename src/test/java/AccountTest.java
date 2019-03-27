@@ -43,5 +43,12 @@ public class AccountTest {
         Account account = new Account();
 
         assertThat(account.report).isEmpty();
+
+        int depositAmount = 100;
+        account.deposit(depositAmount);
+
+        assertThat(account.report).hasSize(1);
+        Object firstMovement = account.report.get(0);
+        assertThat(firstMovement).isEqualTo(depositAmount);
     }
 }
