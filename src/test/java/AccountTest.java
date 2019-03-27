@@ -37,4 +37,11 @@ public class AccountTest {
 
         assertThat(account.balance).isEqualTo(88);
     }
+
+    @Test
+    public void shouldProduceReport() {
+        Account account = new Account();
+
+        assertThat(account.report).isEmpty();
+    }
 }
