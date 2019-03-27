@@ -1,10 +1,12 @@
+import java.time.LocalDate;
+
 class Movement {
 
     int amount;
     Direction direction;
-    String date;
+    LocalDate date;
 
-    Movement(int amount, Direction direction, String date) {
+    Movement(int amount, Direction direction, LocalDate date) {
         this.amount = amount;
         this.direction = direction;
         this.date = date;
@@ -12,6 +14,5 @@ class Movement {
 
     enum Direction {
         DEPOSIT,
-        WITHDRAWAL
     }
 }
