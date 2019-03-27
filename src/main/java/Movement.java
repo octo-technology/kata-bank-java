@@ -11,4 +11,8 @@ class Movement {
         this.direction = direction;
         this.date = date;
     }
+
+    public int signedAmount() {
+        return amount * (direction == Direction.DEPOSIT ? 1 : -1);
+    }
 }

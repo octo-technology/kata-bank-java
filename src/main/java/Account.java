@@ -15,4 +15,14 @@ class Account {
         report.add(new Movement(amount, Direction.WITHDRAWAL, date));
         balance -= amount;
     }
+
+    public int balanceAt(LocalDate date) {
+        return report.stream().filter(movement -> isBeforeOrEqual(date, movement))
+                .mapToInt(movement -> movement.signedAmount())
+                .sum();
+    }
+
+    private boolean isBeforeOrEqual(LocalDate date, Movement movement) {
+        return movement.date.isBefore(date) || movement.date.isEqual(date);
+    }
 }
