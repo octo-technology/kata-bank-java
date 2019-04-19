@@ -1,3 +1,8 @@
+package domain;
+
+import domain.Account;
+import domain.Direction;
+import domain.Movement;
 import org.junit.Test;
 
 import java.time.LocalDate;
