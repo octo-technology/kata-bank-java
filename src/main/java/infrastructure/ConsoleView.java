@@ -5,6 +5,9 @@ import domain.View;
 import java.util.Scanner;
 
 public class ConsoleView implements View {
+
+    private final Scanner reader = new Scanner(System.in);
+
     @Override
     public void display(String textToDisplay) {
         System.out.println(textToDisplay);
@@ -12,9 +15,6 @@ public class ConsoleView implements View {
 
     @Override
     public String getUserInput() {
-        Scanner reader = new Scanner(System.in);
-        String input = reader.next();
-        reader.close();
-        return input;
+        return reader.next();
     }
 }

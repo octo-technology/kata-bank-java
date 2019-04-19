@@ -3,6 +3,7 @@ import domain.View;
 import infrastructure.ConsoleView;
 import infrastructure.UserInterface;
 import use_cases.DoDeposit;
+import use_cases.DoWithdraw;
 
 import java.time.LocalDate;
 
@@ -21,7 +22,8 @@ public class Main {
 
         View consoleView = new ConsoleView();
         DoDeposit doDeposit = new DoDeposit(account);
-        UserInterface userInterface = new UserInterface(consoleView, doDeposit);
+        DoWithdraw doWithdraw = new DoWithdraw(account);
+        UserInterface userInterface = new UserInterface(consoleView, doDeposit, doWithdraw);
         String action = userInterface.getAction();
         userInterface.callAction(action);
 
