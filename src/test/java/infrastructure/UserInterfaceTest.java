@@ -26,7 +26,7 @@ public class UserInterfaceTest {
         // Then
         verify(view).display("Select action:\n" +
                 "1) Make a deposit\n" +
-                "2) Make a withdrawal");
+                "2) Make a withdrawal\n");
     }
 
     @Test
