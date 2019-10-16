@@ -1,8 +1,5 @@
 package domain;
 
-import domain.Account;
-import domain.Direction;
-import domain.Movement;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -83,7 +80,7 @@ public class AccountTest {
         Account account = new Account();
         LocalDate date = LocalDate.of(2019, 3, 27);
         account.deposit(250, date);
-        account.withdraw(50,date.plusDays(1));
+        account.withdraw(50, date.plusDays(1));
         assertThat(account.balanceAt(date)).isEqualTo(250);
         assertThat(account.balanceAt(date.plusDays(1))).isEqualTo(200);
     }

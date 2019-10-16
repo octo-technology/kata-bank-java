@@ -22,7 +22,6 @@ public class UserInterface {
     }
 
     public String getAction() {
-
         String textToDisplay = "Select action:\n";
         for (AccountAction action : AccountAction.values()) {
             textToDisplay += action.getActionTextDescription() + '\n';

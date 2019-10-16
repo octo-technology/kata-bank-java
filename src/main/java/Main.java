@@ -7,8 +7,6 @@ import use_cases.DoWithdraw;
 
 import java.time.LocalDate;
 
-import static java.time.LocalDate.now;
-
 public class Main {
     public static void main(String[] args) {
         Account account = new Account();
@@ -18,15 +16,11 @@ public class Main {
         account.withdraw(100, LocalDate.of(2019, 3, 20));
         account.withdraw(20, LocalDate.of(2019, 3, 30));
 
-        System.out.println(account.balanceAt(now()));
-
         View consoleView = new ConsoleView();
         DoDeposit doDeposit = new DoDeposit(account);
         DoWithdraw doWithdraw = new DoWithdraw(account);
         UserInterface userInterface = new UserInterface(consoleView, doDeposit, doWithdraw);
         String action = userInterface.getAction();
         userInterface.callAction(action);
-
-        System.out.println(account.balanceAt(now()));
     }
 }
